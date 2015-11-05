@@ -11,7 +11,6 @@ set encoding=utf-8
 set t_Co=256
 set dictionary=/usr/share/dict/words
 
-
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -49,7 +48,6 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Syntax highlighting
-"colorscheme desert
 filetype off
 filetype plugin indent on
 syntax on
@@ -58,8 +56,6 @@ let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 " Line numbers and length
 set tw=79	" Terminal width
 set wrap linebreak nolist
-"set linebreak 
-"set nolist
 
 " History
 set history=700
@@ -90,10 +86,6 @@ set showmatch
 " Install plugins in .vim/bundles/plugin-name/
 call pathogen#infect()
 
-" ===============================================
-" Python IDE Setup
-" ===============================================
-
 " Vim-Poweline
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
@@ -113,9 +105,6 @@ set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-" Python Folding
-set nofoldenable
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -129,27 +118,14 @@ set ffs=unix,dos,mac
 map j gj
 map k gk
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
 " Close the current buffer
 map <leader>bd :Bclose<cr>
-
-" Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful wren editing files in the same directory
-map <leader>te :rabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
@@ -167,35 +143,11 @@ endtry
 " Remember info about open buffers on close
 set viminfo^=%
 
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-"set laststatus=2
-
-" Format the status line
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
-
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-    nmap <D-j> <M-j>
-    nmap <D-k> <M-k>
-    vmap <D-j> <M-j>
-    vmap <D-k> <M-k>
-endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
@@ -205,7 +157,6 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -218,7 +169,6 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -270,7 +220,6 @@ function! <SID>BufcloseCloseIt()
         execute("bdelete! ".l:currentBufNum)
     endif
 endfunction
-
 
 function! HasPaste()
     if &paste
